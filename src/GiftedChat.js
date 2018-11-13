@@ -298,7 +298,10 @@ class GiftedChat extends React.Component {
     if (this._messageContainerRef === null) {
       return;
     }
-    this._messageContainerRef.scrollTo({ y: 0, animated });
+    // Workaround for https://github.com/FaridSafi/react-native-gifted-chat/issues/975
+    // Need to make a PR with a prop-controllable fix
+    const index = this.props.messages.length -1
+    this._messageContainerRef.scrollTo({ index, viewOffset: -60, animated, viewPosition: 1 })
   }
 
 
