@@ -295,13 +295,18 @@ class GiftedChat extends React.Component {
   }
 
   scrollToBottom(animated = true) {
+    const { bottomViewOffset, bottomViewPosition, messages } = this.props
     if (this._messageContainerRef === null) {
       return;
     }
     // Workaround for https://github.com/FaridSafi/react-native-gifted-chat/issues/975
-    // Need to make a PR with a prop-controllable fix
-    const index = this.props.messages.length -1
-    this._messageContainerRef.scrollTo({ index, viewOffset: -60, animated, viewPosition: 1 })
+    const lastMessageIndex = messages.length -1;
+    this._messageContainerRef.scrollTo({
+      lastMessageIndex,
+      viewOffset: bottomViewOffset,
+      viewPosition: bottomViewPosition,
+      animated
+    })
   }
 
 
@@ -560,6 +565,8 @@ GiftedChat.defaultProps = {
   maxInputLength: null,
   forceGetKeyboardHeight: false,
   inverted: true,
+  bottomViewOffset: 0,
+  bottomViewPosition: 1
 };
 
 GiftedChat.propTypes = {
@@ -610,6 +617,8 @@ GiftedChat.propTypes = {
   forceGetKeyboardHeight: PropTypes.bool,
   inverted: PropTypes.bool,
   textInputProps: PropTypes.object,
+  scrollBottomOffset: PropTypes.number,
+  bottomViewPosition: PropTypes.number
 };
 
 export {
