@@ -302,7 +302,7 @@ class GiftedChat extends React.Component {
     // Workaround for https://github.com/FaridSafi/react-native-gifted-chat/issues/975
     const lastMessageIndex = messages.length -1;
     this._messageContainerRef.scrollTo({
-      lastMessageIndex,
+      index: lastMessageIndex,
       viewOffset: bottomViewOffset,
       viewPosition: bottomViewPosition,
       animated
